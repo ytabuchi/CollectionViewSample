@@ -28,6 +28,8 @@ namespace CollectionViewSample
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<CollectionViewPagePrism, CollectionViewPagePrismViewModel>();
+            containerRegistry.RegisterForNavigation<CollectionViewPage, CollectionViewPageViewModel>();
         }
     }
 }
