@@ -1,5 +1,6 @@
 ﻿using CollectionViewSample.Models;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace CollectionViewSample.Views
@@ -156,6 +157,16 @@ namespace CollectionViewSample.Views
             });
 
             Monkeys = new ObservableCollection<Monkey>(Monkeys);
+        }
+
+        private async void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.Count == 0)
+                return;
+
+            var current = (e.CurrentSelection.FirstOrDefault() as Monkey)?.Name;
+            await DisplayAlert("Selected", $"{current} is selected.", "OK");
+            collectionView.SelectedItem = null;
         }
     }
 }

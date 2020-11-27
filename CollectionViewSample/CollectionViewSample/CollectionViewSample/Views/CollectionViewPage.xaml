@@ -4,7 +4,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="CollectionPage">
 
-    <CollectionView ItemsSource="{Binding}">
+    <CollectionView x:Name="collectionView"
+                    ItemsSource="{Binding}"
+                    SelectionChanged="OnCollectionViewSelectionChanged"
+                    SelectionMode="Single">
         <CollectionView.ItemsLayout>
             <GridItemsLayout HorizontalItemSpacing="2"
                              Orientation="Vertical"

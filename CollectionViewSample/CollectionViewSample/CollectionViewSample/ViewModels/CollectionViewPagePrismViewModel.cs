@@ -2,23 +2,51 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CollectionViewSample.ViewModels
 {
     public class CollectionViewPagePrismViewModel : ViewModelBase
     {
+        private readonly IPageDialogService _pageDialogService;
+
         public ObservableCollection<Monkey> Monkeys { get; set; } = new ObservableCollection<Monkey>();
 
-        public CollectionViewPagePrismViewModel(INavigationService navigationService)
+        private Monkey selectedMonkey;
+        public Monkey SelectedMonkey
+        {
+            get { return selectedMonkey; }
+            set { SetProperty(ref selectedMonkey, value); }
+        }
+
+        public DelegateCommand SelectionChangedCommand { get; private set; }
+
+        public CollectionViewPagePrismViewModel(INavigationService navigationService, 
+                                                IPageDialogService pageDialogService)
             : base(navigationService)
         {
+            _pageDialogService = pageDialogService;
+
             Title = "CollectionView (Prism ver.)";
 
             CreateMonkeyCollection();
+
+            SelectionChangedCommand = new DelegateCommand(async () => await SelectionChanged());
+        }
+
+        private async Task SelectionChanged()
+        {
+            if (SelectedMonkey == null)
+                return;
+
+            await _pageDialogService.DisplayAlertAsync("Selected", $"{SelectedMonkey?.Name} is selected.", "OK");
+            SelectedMonkey = null;
         }
 
         void CreateMonkeyCollection()

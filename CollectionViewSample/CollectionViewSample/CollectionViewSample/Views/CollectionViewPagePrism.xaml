@@ -6,7 +6,10 @@
              Title="{Binding Title}"
              prism:ViewModelLocator.AutowireViewModel="True">
 
-    <CollectionView ItemsSource="{Binding Monkeys}">
+    <CollectionView ItemsSource="{Binding Monkeys}"
+                    SelectedItem="{Binding SelectedMonkey}"
+                    SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                    SelectionMode="Single">
         <CollectionView.ItemsLayout>
             <GridItemsLayout HorizontalItemSpacing="2"
                              Orientation="Vertical"
