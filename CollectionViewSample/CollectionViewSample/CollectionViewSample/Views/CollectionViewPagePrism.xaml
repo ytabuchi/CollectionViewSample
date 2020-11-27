@@ -7,30 +7,45 @@
              prism:ViewModelLocator.AutowireViewModel="True">
 
     <CollectionView ItemsSource="{Binding Monkeys}">
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout HorizontalItemSpacing="2"
+                             Orientation="Vertical"
+                             Span="2"
+                             VerticalItemSpacing="2" />
+        </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Grid Padding="10">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.RowSpan="2"
-                           WidthRequest="60"
-                           HeightRequest="60"
+                    <Image Grid.Row="0"
+                           Grid.RowSpan="3"
+                           WidthRequest="180"
+                           HeightRequest="180"
                            Aspect="AspectFill"
                            Source="{Binding ImageUrl}" />
-                    <Label Grid.Column="1"
+                    <BoxView Grid.Row="0"
+                             HeightRequest="5"
+                             BackgroundColor="Black"
+                             Opacity="0.6" />
+                    <Label Grid.Row="0"
+                           Padding="5,0"
                            FontAttributes="Bold"
-                           Text="{Binding Name}" />
-                    <Label Grid.Column="1"
-                           Grid.Row="1"
+                           Text="{Binding Name}"
+                           TextColor="White" />
+                    <BoxView Grid.Row="2"
+                             HeightRequest="5"
+                             BackgroundColor="Black"
+                             Opacity="0.4" />
+                    <Label Grid.Row="2"
+                           Padding="5,0"
                            VerticalOptions="End"
                            FontAttributes="Italic"
-                           Text="{Binding Location}" />
+                           Text="{Binding Location}"
+                           TextColor="White" />
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
